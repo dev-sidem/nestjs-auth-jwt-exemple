@@ -18,7 +18,7 @@ export class AuthService {
   }
 
   async login(loginDto: LoginDto) {
-    const user = await this.userService.findOneByLogin(loginDto.login);
+    const user = await this.userService.findOneByEmail(loginDto.email);
     if (!user) {
       throw new UnauthorizedException('Identifiants invalides');
     }

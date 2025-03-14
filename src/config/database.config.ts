@@ -5,7 +5,7 @@ export const databaseConfig: TypeOrmModuleOptions = {
   host: 'localhost',
   port: 3306,
   username: 'root',
-  password: 'azerty1234',
+  password: 'password',
   database: 'auth_jwt_db',
   entities: [__dirname + '/../**/*.entity{.ts,.js}'],
   synchronize: true,

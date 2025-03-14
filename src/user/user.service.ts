@@ -18,11 +18,11 @@ export class UserService {
 
   async create(registerDto: RegisterDto): Promise<UserEntity> {
     const userExists = await this.userRepository.findOne({
-      where: { login: registerDto.login },
+      where: { email: registerDto.email },
     });
 
     if (userExists) {
-      throw new ConflictException('Cet identifiant existe déjà');
+      throw new ConflictException('Cet email existe déjà');
     }
 
     const user = this.userRepository.create(registerDto);
@@ -36,6 +36,15 @@ export class UserService {
     }
     return user;
   }
+
+  async findOneByEmail(email: string): Promise<UserEntity> {
+    const user = await this.userRepository.findOne({ where: { email } });
+    if (!user) {
+      throw new NotFoundException('Utilisateur non trouvé');
+    }
+    return user;
+  }
+
   async getAllUsers(): Promise<UserEntity[]> {
     return this.userRepository.find();
   }
